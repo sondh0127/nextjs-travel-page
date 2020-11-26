@@ -1,230 +1,156 @@
-import Head from 'next/head'
+//@ts-nocheck
+import React from 'react'
 import tw from 'twin.macro'
-import Button from '../components/Button'
-import Logo from '../components/Logo'
+import { css } from 'styled-components/macro' //eslint-disable-line
+import AnimationRevealPage from 'helpers/AnimationRevealPage.js'
+import Hero from 'components/hero/TwoColumnWithVideo.js'
+import Features from 'components/features/ThreeColSimple.js'
+import MainFeature from 'components/features/TwoColWithButton.js'
+import MainFeature2 from 'components/features/TwoColSingleFeatureWithStats2.js'
+import TabGrid from 'components/cards/TabCardGrid.js'
+import Testimonial from 'components/testimonials/ThreeColumnWithProfileImage.js'
+import DownloadApp from 'components/cta/DownloadApp.js'
+import Footer from 'components/footers/FiveColumnWithInputForm.js'
 
-export const Home = (): JSX.Element => (
-  <div className="container">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import chefIconImageSrc from 'images/chef-icon.svg'
+import celebrationIconImageSrc from 'images/celebration-icon.svg'
+import shopIconImageSrc from 'images/shop-icon.svg'
 
-    <div
-      css={[
-        tw`flex flex-col items-center justify-center h-screen w-full`,
-        tw`bg-gradient-to-b from-electric to-ribbon`,
-      ]}
-    >
-      <div tw="flex flex-col justify-center h-full space-y-5">
-        <Button isPrimary>Submit</Button>
-        <Button isSecondary>Cancel</Button>
-        <Button isSmall>Close</Button>
-      </div>
-      <Logo />
-    </div>
-
-    <main>
-      <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
-
-      <p className="description">
-        Get started by editing <code>pages/index.tsx</code>
-      </p>
-
-      <button
-        onClick={() => {
-          window.alert('With typescript and Jest')
-        }}
-      >
-        Test Button
-      </button>
-
-      <div className="grid">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
-
-        <a
-          href="https://github.com/vercel/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="card"
-        >
-          <h3>Deploy &rarr;</h3>
-          <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-      </a>
-    </footer>
-
-    <style jsx>{`
-      .container {
-        min-height: 100vh;
-        padding: 0 0.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      main {
-        padding: 5rem 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer {
-        width: 100%;
-        height: 100px;
-        border-top: 1px solid #eaeaea;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer img {
-        margin-left: 0.5rem;
-      }
-
-      footer a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .title a {
-        color: #0070f3;
-        text-decoration: none;
-      }
-
-      .title a:hover,
-      .title a:focus,
-      .title a:active {
-        text-decoration: underline;
-      }
-
-      .title {
-        margin: 0;
-        line-height: 1.15;
-        font-size: 4rem;
-      }
-
-      .title,
-      .description {
-        text-align: center;
-      }
-
-      .description {
-        line-height: 1.5;
-        font-size: 1.5rem;
-      }
-
-      code {
-        background: #fafafa;
-        border-radius: 5px;
-        padding: 0.75rem;
-        font-size: 1.1rem;
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-      }
-
-      .grid {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-
-        max-width: 800px;
-        margin-top: 3rem;
-      }
-
-      .card {
-        margin: 1rem;
-        flex-basis: 45%;
-        padding: 1.5rem;
-        text-align: left;
-        color: inherit;
-        text-decoration: none;
-        border: 1px solid #eaeaea;
-        border-radius: 10px;
-        transition: color 0.15s ease, border-color 0.15s ease;
-      }
-
-      .card:hover,
-      .card:focus,
-      .card:active {
-        color: #0070f3;
-        border-color: #0070f3;
-      }
-
-      .card h3 {
-        margin: 0 0 1rem 0;
-        font-size: 1.5rem;
-      }
-
-      .card p {
-        margin: 0;
-        font-size: 1.25rem;
-        line-height: 1.5;
-      }
-
-      .logo {
-        height: 1em;
-      }
-
-      @media (max-width: 600px) {
-        .grid {
-          width: 100%;
-          flex-direction: column;
+const HomePage = () => {
+  const Subheading = tw.span`tracking-wider text-sm font-medium`
+  const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`
+  const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`
+  const Description = tw.span`inline-block mt-8`
+  const imageCss = tw`rounded-4xl`
+  return (
+    <AnimationRevealPage>
+      <Hero
+        heading={
+          <>
+            Delicious & Affordable <HighlightedText>Meals Near You.</HighlightedText>
+          </>
         }
-      }
-    `}</style>
-
-    <style jsx global>{`
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-    `}</style>
-  </div>
-)
-
-export default Home
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        imageSrc="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80"
+        imageCss={imageCss}
+        imageDecoratorBlob={true}
+        primaryButtonText="Order Now"
+        watchVideoButtonText="Meet The Chefs"
+      />
+      <MainFeature
+        subheading={<Subheading>Established Since 2014</Subheading>}
+        heading={
+          <>
+            Weve been serving for
+            <wbr /> <HighlightedText>over 5 years.</HighlightedText>
+          </>
+        }
+        description={
+          <Description>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+            <br />
+            <br />
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </Description>
+        }
+        buttonRounded={false}
+        textOnLeft={false}
+        primaryButtonText="Latest Offers"
+        imageSrc={
+          'https://images.unsplash.com/photo-1460306855393-0410f61241c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80'
+        }
+        imageCss={imageCss}
+        imageDecoratorBlob={true}
+        imageDecoratorBlobCss={tw`-translate-x-1/2 opacity-25 left-1/2 md:w-32 md:h-32`}
+      />
+      {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
+      <TabGrid
+        heading={
+          <>
+            Checkout our <HighlightedText>menu.</HighlightedText>
+          </>
+        }
+      />
+      <Features
+        heading={
+          <>
+            Amazing <HighlightedText>Services.</HighlightedText>
+          </>
+        }
+        cards={[
+          {
+            imageSrc: shopIconImageSrc,
+            title: '230+ Locations',
+            description: 'Lorem ipsum donor amet siti ceali placeholder text',
+            url: 'https://google.com',
+          },
+          {
+            imageSrc: chefIconImageSrc,
+            title: 'Professional Chefs',
+            description: 'Lorem ipsum donor amet siti ceali placeholder text',
+            url: 'https://timerse.com',
+          },
+          {
+            imageSrc: celebrationIconImageSrc,
+            title: 'Birthday Catering',
+            description: 'Lorem ipsum donor amet siti ceali placeholder text',
+            url: 'https://reddit.com',
+          },
+        ]}
+        imageContainerCss={tw`p-2!`}
+        imageCss={tw`w-20! h-20!`}
+      />
+      <MainFeature2
+        subheading={<Subheading>A Reputed Brand</Subheading>}
+        heading={
+          <>
+            Why <HighlightedText>Choose Us ?</HighlightedText>
+          </>
+        }
+        statistics={[
+          {
+            key: 'Orders',
+            value: '94000+',
+          },
+          {
+            key: 'Customers',
+            value: '11000+',
+          },
+          {
+            key: 'Chefs',
+            value: '1500+',
+          },
+        ]}
+        primaryButtonText="Order Now"
+        primaryButtonUrl="https://order.now.com"
+        imageInsideDiv={false}
+        imageSrc="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEzNzI2fQ&auto=format&fit=crop&w=768&q=80"
+        imageCss={Object.assign(tw`bg-cover`, imageCss)}
+        imageContainerCss={tw`h-auto md:w-1/2`}
+        imageDecoratorBlob={true}
+        imageDecoratorBlobCss={tw`-translate-x-1/2 opacity-25 left-1/2 md:w-32 md:h-32`}
+        textOnLeft={true}
+      />
+      <Testimonial
+        subheading=""
+        heading={
+          <>
+            Customers <HighlightedText>Love Us.</HighlightedText>
+          </>
+        }
+      />
+      <DownloadApp
+        text={
+          <>
+            People around you are ordering delicious meals using the{' '}
+            <HighlightedTextInverse>Treact App.</HighlightedTextInverse>
+          </>
+        }
+      />
+      <Footer />
+    </AnimationRevealPage>
+  )
+}
+export default HomePage

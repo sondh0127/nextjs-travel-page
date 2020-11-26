@@ -1,6 +1,9 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app'
 import { GlobalStyles } from 'twin.macro'
+import Modal from 'react-modal'
+
+Modal.setAppElement('#__next')
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
