@@ -1,4 +1,7 @@
 import Head from 'next/head'
+import tw from 'twin.macro'
+import Button from '../components/Button'
+import Logo from '../components/Logo'
 
 export const Home = (): JSX.Element => (
   <div className="container">
@@ -6,6 +9,20 @@ export const Home = (): JSX.Element => (
       <title>Create Next App</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
+
+    <div
+      css={[
+        tw`flex flex-col items-center justify-center h-screen w-full`,
+        tw`bg-gradient-to-b from-electric to-ribbon`,
+      ]}
+    >
+      <div tw="flex flex-col justify-center h-full space-y-5">
+        <Button isPrimary>Submit</Button>
+        <Button isSecondary>Cancel</Button>
+        <Button isSmall>Close</Button>
+      </div>
+      <Logo />
+    </div>
 
     <main>
       <h1 className="title">
