@@ -4,7 +4,14 @@ import tw from 'twin.macro'
 //eslint-disable-next-line
 import { css } from 'styled-components/macro'
 
-import Header from '../headers/light.js'
+import Header, {
+  NavLink,
+  NavLinks,
+  PrimaryLink,
+  LogoLink,
+  NavToggle,
+  DesktopNavLinks,
+} from '../headers/light.js'
 
 import ReactModalAdapter from '../../helpers/ReactModalAdapter.js'
 import ResponsiveVideoEmbed from '../../helpers/ResponsiveVideoEmbed.js'
@@ -15,13 +22,45 @@ import { ReactComponent as SvgDecoratorBlob1 } from '../../images/svg-decorator-
 import { ReactComponent as SvgDecoratorBlob2 } from '../../images/dot-pattern.svg'
 import DesignIllustration from '../../images/design-illustration.svg'
 
-const Container = tw.div`relative`
-const TwoColumn = tw.div`flex flex-col lg:flex-row md:items-center max-w-screen-xl mx-auto py-20 md:py-24`
-const LeftColumn = tw.div`relative lg:w-6/12 lg:pr-12 flex-shrink-0 text-center lg:text-left`
+const backgroundUrl = '/images/jasmine-home-1.jpeg'
+
+const StyledHeader = styled(Header)`
+  ${tw`pt-8 max-w-none`}
+  ${DesktopNavLinks} ${NavLink}, ${LogoLink} {
+    ${tw`text-gray-100 hover:border-gray-300 hover:text-gray-300`}
+  }
+  ${NavToggle}.closed {
+    ${tw`text-gray-100 hover:text-primary-500`}
+  }
+`
+const Container = styled.div`
+  ${tw`relative min-h-screen -mx-8 -mt-8 bg-center bg-cover`}
+  background-image: url("/images/jasmine-home-1.jpeg");
+`
+
+const OpacityOverlay = tw.div`z-10 absolute inset-0 bg-primary-400 opacity-15`
+
+const HeroContainer = tw.div`z-20 relative px-4 sm:px-8 max-w-screen-xl mx-auto`
+
+const TwoColumn = tw.div`flex flex-col items-center justify-center lg:flex-row md:items-center max-w-screen-xl mx-auto py-20 md:py-24`
+const LeftColumn = tw.div`relative flex-shrink-0 text-center lg:text-left`
 const RightColumn = tw.div`relative mt-12 lg:mt-0 flex flex-col justify-center`
 
-const Heading = tw.h1`font-black text-3xl md:text-5xl leading-snug max-w-3xl`
-const Paragraph = tw.p`my-5 lg:my-8 text-sm lg:text-base font-medium text-gray-600 max-w-lg mx-auto lg:mx-0`
+const Heading = styled.h1`
+  ${tw`font-serif text-3xl font-black leading-none text-center text-gray-100 lg:text-left sm:text-4xl lg:text-5xl xl:text-6xl`}
+  span {
+    ${tw`inline-block mt-2`}
+  }
+`
+
+const SlantedBackground = styled.span`
+  ${tw`relative px-4 py-2 -mx-4 text-primary-500`}
+  &::before {
+    content: '';
+    ${tw`absolute inset-0 transform -skew-x-12 bg-gray-100 -z-10`}
+  }
+`
+const Paragraph = tw.p`my-5 lg:my-8 text-base lg:text-lg font-medium text-gray-100 max-w-lg mx-auto lg:mx-0`
 
 const Actions = tw.div`flex flex-col items-center sm:flex-row justify-center lg:justify-start mt-8`
 const PrimaryButton = tw.button`font-bold px-8 lg:px-10 py-3 rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 focus:shadow-outline focus:outline-none transition duration-300`
@@ -68,22 +107,41 @@ export default ({
   imageSrc = DesignIllustration,
   imageCss = null,
   imageDecoratorBlob = false,
+  buttonRounded = true,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen)
+  const buttonRoundedCss = buttonRounded && tw`rounded-full`
 
+  const navLinks = [
+    <NavLinks key={1}>
+      <NavLink href="#">About</NavLink>
+      <NavLink href="#">Blog</NavLink>
+      <NavLink href="#">Locations</NavLink>
+      <NavLink href="#">Pricing</NavLink>
+    </NavLinks>,
+    <NavLinks key={2}>
+      <PrimaryLink href="/#">Hire Us</PrimaryLink>
+    </NavLinks>,
+  ]
   return (
-    <>
-      <Header />
-      <Container>
+    <Container>
+      {/* <OpacityOverlay /> */}
+      <HeroContainer>
+        <StyledHeader links={navLinks} />
         <TwoColumn>
           <LeftColumn>
-            <Heading>{heading}</Heading>
-            <Paragraph>{description}</Paragraph>
+            <Heading>
+              <span>Welcome to</span>
+              <br />
+              <SlantedBackground>Jasmine Tours</SlantedBackground>
+            </Heading>
+            <Paragraph>MOTORBIKE TOURS – EASYRIDER TOURS – MOTORBIKE RENTAL – ROOMS</Paragraph>
             <Actions>
               <PrimaryButton as="a" href={primaryButtonUrl}>
-                {primaryButtonText}
+                {/* {primaryButtonText} */}
+                Book now
               </PrimaryButton>
               <WatchVideoButton onClick={toggleModal}>
                 <span className="playIconContainer">
@@ -93,12 +151,12 @@ export default ({
               </WatchVideoButton>
             </Actions>
           </LeftColumn>
-          <RightColumn>
-            <IllustrationContainer>
+          {/* <RightColumn> */}
+          {/* <IllustrationContainer>
               <img css={imageCss} src={imageSrc} alt="Hero" />
               {imageDecoratorBlob && <DecoratorBlob2 />}
-            </IllustrationContainer>
-          </RightColumn>
+            </IllustrationContainer> */}
+          {/* </RightColumn> */}
         </TwoColumn>
         <DecoratorBlob1 />
         <StyledModal
@@ -115,7 +173,7 @@ export default ({
             <ResponsiveVideoEmbed url={watchVideoYoutubeUrl} tw="w-full" />
           </div>
         </StyledModal>
-      </Container>
-    </>
+      </HeroContainer>
+    </Container>
   )
 }
